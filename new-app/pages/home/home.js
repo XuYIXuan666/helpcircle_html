@@ -46,13 +46,44 @@ Page({
 一时间《盗墓笔记》粉丝炸开了锅，三叔刚刚收回版权就是不一样，先来一波粉丝福利！
 全球即时战斗玩法,联盟作战!`
       },
+      {
+        id: '6',
+        title: '朱一龙版《盗墓笔记重启》吴邪名字的含义，你们真的知道吗？',
+        text: `近日由朱一龙主演的《盗墓笔记重启之极海听雷》即将八月线上首播，细心的网友发现，这版《盗墓笔记》改编网剧竟然有72集，这不就是活脱脱的一部大型电视剧吗？
+网友忐忑吐槽“这个夏天凉快了，72集基本可以熬到开学了”
+一时间《盗墓笔记》粉丝炸开了锅，三叔刚刚收回版权就是不一样，先来一波粉丝福利！
+全球即时战斗玩法,联盟作战!`
+      },
+      {
+        id: '7',
+        title: '朱一龙版《盗墓笔记重启》吴邪名字的含义，你们真的知道吗？',
+        text: `近日由朱一龙主演的《盗墓笔记重启之极海听雷》即将八月线上首播，细心的网友发现，这版《盗墓笔记》改编网剧竟然有72集，这不就是活脱脱的一部大型电视剧吗？
+网友忐忑吐槽“这个夏天凉快了，72集基本可以熬到开学了”
+一时间《盗墓笔记》粉丝炸开了锅，三叔刚刚收回版权就是不一样，先来一波粉丝福利！
+全球即时战斗玩法,联盟作战!`
+      },
+      {
+        id: '8',
+        title: '朱一龙版《盗墓笔记重启》吴邪名字的含义，你们真的知道吗？',
+        text: `近日由朱一龙主演的《盗墓笔记重启之极海听雷》即将八月线上首播，细心的网友发现，这版《盗墓笔记》改编网剧竟然有72集，这不就是活脱脱的一部大型电视剧吗？
+网友忐忑吐槽“这个夏天凉快了，72集基本可以熬到开学了”
+一时间《盗墓笔记》粉丝炸开了锅，三叔刚刚收回版权就是不一样，先来一波粉丝福利！
+全球即时战斗玩法,联盟作战!`
+      },
+      {
+        id: '9',
+        title: '朱一龙版《盗墓笔记重启》吴邪名字的含义，你们真的知道吗？',
+        text: `近日由朱一龙主演的《盗墓笔记重启之极海听雷》即将八月线上首播，细心的网友发现，这版《盗墓笔记》改编网剧竟然有72集，这不就是活脱脱的一部大型电视剧吗？
+网友忐忑吐槽“这个夏天凉快了，72集基本可以熬到开学了”
+一时间《盗墓笔记》粉丝炸开了锅，三叔刚刚收回版权就是不一样，先来一波粉丝福利！
+全球即时战斗玩法,联盟作战!`
+      },
     ],
     inputVal: '',
+    page: 1,
   },
   search: function(){
-    this.setData({
-      inputVal: ''
-    })
+    this.getForumList(this.data.inputVal, this.data.page)
   },
   inputTyping: function(e){
     this.setData({
@@ -67,11 +98,34 @@ Page({
       // url: '/pages/detail/detail?id=' + entid
     })
   },
+  getForumList: function (inputVal, page){
+    wx.request({
+      url: 'http://47.99.185.55:8081/post/list',
+      method: 'Get',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        lostName: inputVal,
+        pageSize: 10,
+        postName: 1,
+        page: page
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.success) {
+
+        } else {
+          console.log('服务器异常');
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getForumList(this.data.inputVal, this.data.page)
   },
 
   /**
@@ -113,7 +167,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      page: this.data.page + 1
+    })
+    // this.getForumList(this.data.inputVal, this.data.page)
   },
 
   /**
