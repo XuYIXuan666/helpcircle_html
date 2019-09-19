@@ -6,6 +6,7 @@ Page({
    */
   data: {
     listShow: true,
+    inputVal: '',
     articleList: [
       {
         id:'1',
@@ -72,6 +73,20 @@ Page({
     ],
     
   },
+  search: function () {
+    this.getList(this.data.inputVal)
+  },
+  cancel() {
+    this.setData({
+      inputVal: ''
+    })
+    this.getList(this.data.inputVal)
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    })
+  },
   find:function(e){
     var that = this;
     let type = e.currentTarget.dataset['type'];
@@ -85,11 +100,35 @@ Page({
       })
     }
   },
+  getList: function (inputVal) {
+    var that = this;
+    wx.request({
+      url: 'http://47.99.185.55:8081/ques/list',
+      method: 'Get',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        lostName: inputVal,
+        pageSize: 10,
+        page: 1
+      },
+      success: function (res) {
+        if (res.data.success) {
+          that.setData({
+            forumList: res.data.returnData
+          })
+        } else {
+          console.log('服务器异常');
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getList(23)
   },
   /**
    * 页面上拉触底事件的处理函数

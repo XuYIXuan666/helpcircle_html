@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    detail_id: '',
     title: '朱一龙版《盗墓笔记重启》吴邪名字的含义，你们真的知道吗？',
     text: `东方体育日报
 4小时前 · 《东方体育日报》官方账号
@@ -56,8 +55,27 @@ Page({
     ],
   },
   onLoad: function (options) {
-    this.setData({
-      detail_id: options.id
+    console.log(options)
+    var that = this;
+    wx.request({
+      url: 'http://47.99.185.55:8081/post/details',
+      method: 'Get',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        postNO: options.openNo,
+      },
+      success: function (res) {
+        if (res.data.success) {
+          that.setData({
+            title: res.data.returnData.postName,
+            text: postDelete
+          })
+        } else {
+          console.log('服务器异常');
+        }
+      }
     })
   },
   inputTyping: function (e) {

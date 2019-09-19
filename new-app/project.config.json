@@ -75,6 +75,12 @@
 					"pathName": "pages/message/message",
 					"query": "id=1",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/release",
+					"pathName": "pages/user/release",
+					"scene": null
 				}
 			]
 		}

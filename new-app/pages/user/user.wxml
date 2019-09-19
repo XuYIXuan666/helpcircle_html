@@ -1,31 +1,44 @@
 <!--pages/user/user.wxml-->
 <view>
-  <view class="userinfo">
-    <text class="introduction">头像</text>
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
+    <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
   </view>
-  <view class="userinfo">
-    <block>
-      <text class="introduction">名字</text>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="userinfo" bindtap="postArticle">
-    <block>
-      <text class="introduction">文章发布</text>
-      <text class="userinfo-nickname"> ></text>
-    </block>
-  </view>
-  <view class="userinfo">
-    <block>
-      <text class="introduction">发布失物</text>
-      <text class="userinfo-nickname"> ></text>
-    </block>
-  </view>
-  <view class="userinfo">
-    <block>
-      <text class="introduction">发布失主</text>
-      <text class="userinfo-nickname"> ></text>
-    </block>
+  <view wx:else>
+    <view class="userinfo">
+      <block>
+        <text class="introduction">头像</text>
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      </block>
+    </view>
+    <view class="userinfo">
+      <block>
+        <text class="introduction">名字</text>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+    <navigator url="../user/release">
+      <view class="userinfo">
+        <block>
+          <text class="introduction">发布论坛文章</text>
+          <text class="userinfo-nickname"> ></text>
+        </block>
+      </view>
+    </navigator>
+    <navigator url="../user/lostproperty">
+      <view class="userinfo">
+        <block>
+          <text class="introduction">发布寻找失物</text>
+          <text class="userinfo-nickname"> ></text>
+        </block>
+      </view>
+    </navigator>
+    <navigator url="../user/lostowner">
+      <view class="userinfo">
+        <block>
+          <text class="introduction">发布寻找失主</text>
+          <text class="userinfo-nickname"> ></text>
+        </block>
+      </view>
+    </navigator>
   </view>
 </view>
