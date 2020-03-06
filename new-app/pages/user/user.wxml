@@ -1,9 +1,10 @@
 <!--pages/user/user.wxml-->
 <view>
-  <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
+  <!-- <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
     <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-  </view>
-  <view wx:else>
+  </view> -->
+  <!-- <view wx:else> -->
+  <view>
     <view class="userinfo">
       <block>
         <text class="introduction">头像</text>
@@ -12,6 +13,7 @@
     </view>
     <view class="userinfo">
       <block>
+        <mp-icon icon="add" color="black" size="{{25}}"></mp-icon>
         <text class="introduction">名字</text>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       </block>
